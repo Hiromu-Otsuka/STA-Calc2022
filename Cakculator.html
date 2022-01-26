@@ -1,14 +1,35 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
-    <meta charset="UTF-8">
-    <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
-    <script src="Calculator.js"></script>
-    <link rel="stylesheet" href="Calculator.css">
-    <title>電卓</title>
+  <meta charset="UTF-8">
+  <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          displayAlign: "central",
+          displayIndent: "2em",
+          tex2jax: {
+            inlineMath: [['$','$'], ['\\(','\\)']],
+            processEscapes: true
+          },
+          "CommonHTML": {
+            matchFontHeight: false,
+            mtextFontInherit: true
+          }
+        });
+    </script>
+  <script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS_CHTML">
+    </script>
+  <script src="Calculator.js"></script>
+  <link rel="stylesheet" href="Calculator.css">
+  <title>電卓</title>
 </head>
+
 <body>
-    <div id="Maintable"></div>
-    <script>CreateTable();</script>
+  <div id="Maintable" class="elem"></div>
+  <div class="elem">
+    <!--あああ-->
+  </div>
 </body>
+
 </html>

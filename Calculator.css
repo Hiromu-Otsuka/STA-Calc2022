@@ -21,6 +21,11 @@
     color: white;
 }
 
-.number,#Button4-1{
+.number,.point{
     background-color: lightgray;
+}
+
+.elem{
+    display: inline-block;
+    vertical-align: top;
 }

@@ -1,34 +1,34 @@
 var Ary = [
     [
-        {Char:"(",Btn:"(",Type:"Bracketes"},
-        {Char:")",Btn:")",Type:"Bracketes"},
-        {Char:"^",Btn:"$$x^n$$",Type:"Operator"},
-        {Char:"",Btn:"C/AC",Type:"Delete"}
+        ["(", "(", "Bracketes"],
+        [")", ")", "Bracketes"],
+        ["^", "$$x^n$$", "Operator"],
+        ["", "C/AC", "Delete"]
     ],
     [
-        {Char:"7",Btn:"7",Type:"Number"},
-        {Char:"8",Btn:"8",Type:"Number"},
-        {Char:"9",Btn:"9",Type:"Number"},
-        {Char:"/",Btn:"÷",Type:"Operator"}
+        ["7", "7", "Number"],
+        ["8", "8", "Number"],
+        ["9", "9", "Number"],
+        ["/", "÷", "Operator"]
     ],
     [
-        {Char:"4",Btn:"4",Type:"Number"},
-        {Char:"5",Btn:"5",Type:"Number"},
-        {Char:"6",Btn:"6",Type:"Number"},
-        {Char:"*",Btn:"×",Type:"Operator"}
+        ["4", "4", "Number"],
+        ["5", "5", "Number"],
+        ["6", "6", "Number"],
+        ["*", "×", "Operator"]
     ],
     [
-        {Char:"1",Btn:"1",Type:"Number"},
-        {Char:"2",Btn:"2",Type:"Number"},
-        {Char:"3",Btn:"3",Type:"Number"},
-        {Char:"-",Btn:"-",Type:"Operator"}
+        ["1", "1", "Number"],
+        ["2", "2", "Number"],
+        ["3", "3", "Number"],
+        ["-", "-", "Operator"]
     ],
     [
-        {Char:"0",Btn:"0",Type:"Number"},
-        {Char:".",Btn:".",Type:"Point"},
-        {Char:"=",Btn:"=",Type:"Equal"},
-        {Char:"+",Btn:"+",Type:"Operator"}
-    ],
+        ["0", "0", "Number"],
+        [".", ".", "Point"],
+        ["=", "=", "Equal"],
+        ["+", "+", "Operator"]
+    ]
 ];
 var FromString, Text2, Text1 = "";
 
@@ -52,18 +52,18 @@ window.onload = function CreateTable() {
         } else {
             for (var j = 0; j < Ary[i].length; j++) {
                 var Column = document.createElement("td");
-                Column.insertAdjacentHTML("beforeend", Ary[i][j].Btn);
+                Column.insertAdjacentHTML("beforeend", Ary[i][j][1]);
                 Column.setAttribute("onclick", "TypeBotton(" + i + "," + j + ")");
-                if (Ary[i][j].Type == "Number") {
+                if (Ary[i][j][2] == "Number") {
                     Column.setAttribute("class", "cell number");
-                } else if (Ary[i][j].Type == "Delete") {
+                } else if (Ary[i][j][2] == "Delete") {
                     Column.setAttribute("class", "cell delete");
                     Column.setAttribute("ondblclick", "AllClear()");
-                } else if (Ary[i][j].Type == "Equal") {
+                } else if (Ary[i][j][2] == "Equal") {
                     Column.setAttribute("class", "cell equal");
-                } else if (Ary[i][j].Type == "Point") {
+                } else if (Ary[i][j][2] == "Point") {
                     Column.setAttribute("class", "cell point");
-                }else {
+                } else {
                     Column.setAttribute("class", "cell");
                 }
                 Row.appendChild(Column);
@@ -78,7 +78,7 @@ function TypeBotton(x, y) {
     var GetText1 = document.getElementById("Text1");
     var GetText2 = document.getElementById("Text2");
     Text2 = GetText2.textContent;
-    var CurrentType = Ary[x][y].Type;
+    var CurrentType = Ary[x][y][2];
     if (CurrentType == "Equal") {
         FromString = Text2.replace(/×/g, "*");
         FromString = FromString.replace(/÷/g, "/");
@@ -89,7 +89,7 @@ function TypeBotton(x, y) {
     } else if (CurrentType == "Delete") {
         GetText2.textContent = Text2.slice(0, -1);
     } else {
-        GetText2.textContent += Ary[x][y].Char;
+        GetText2.textContent += Ary[x][y][0];
     }
 }
 
@@ -97,3 +97,26 @@ function AllClear() {
     document.getElementById("Text1").textContent = "";
     document.getElementById("Text2").textContent = "";
 }
+
+addEventListener("keydown", e => {
+    var Key = e.key
+    var List = [
+        ["(", ")", "^", "Delete"],
+        ["7", "8", "9", "/"],
+        ["4", "5", "6", "*"],
+        ["1", "2", "3", "-"],
+        ["0", ".", "=", "+"]
+    ];
+    if(Key == "Enter"){
+        Key = "=";
+    }else if(e.shiftKey == true && Key == "Delete"){
+        AllClear();
+    }
+    List.forEach((row, i) => {
+        row.forEach((element, j) => {
+            if (element == Key) {
+                TypeBotton(i, j)
+            }
+        })
+    });
+});

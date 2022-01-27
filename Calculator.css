@@ -1,31 +1,35 @@
-.cell{
+.cell {
     height: 100px;
     width: 100px;
     text-align: center;
     background-color: gray;
 }
 
-.display{
+.display {
     font-size: 30px;
     text-align: right;
     background-color: lightgray;
 }
 
-.equal{
+.equal {
     background-color: blue;
     color: white;
 }
 
-.delete{
+.delete {
     background-color: red;
     color: white;
 }
 
-.number,.point{
+.number, .point {
     background-color: lightgray;
 }
 
-.elem{
-    display: inline-block;
+div {
+    /*display: inline-block;*/
     vertical-align: top;
+}
+
+p{
+    font-size: 20px;
 }
